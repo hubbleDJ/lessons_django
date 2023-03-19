@@ -1,4 +1,4 @@
-#!/Users/hubble_dj/Yandex.Disk.localized/Programs/studying_django/store-server/venv/bin/python3
+#!/Users/18398782/programs/lessons_django/venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
