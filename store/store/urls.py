@@ -23,7 +23,8 @@ from products.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'), #стартовая страница
-    path('products', include('products.urls', namespace='products')), #страница с товарами
+    path('products/', include('products.urls', namespace='products')), #страница с товарами
+    path('users/', include('users.urls', namespace='user')), #страница с пользователями
 ]
 
 if settings.DEBUG:
