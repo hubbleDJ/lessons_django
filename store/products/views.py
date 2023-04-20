@@ -12,10 +12,11 @@ def index(request):
     }
     return render(request, 'products/index.html', context)
 
-def products(request):
+def products(request, category_id=None):
+    
     context = {
         'title': 'Store - Каталог',
-        'products': Product.objects.all(),
+        'products': Product.objects.filter(category__id=category_id) if category_id else Product.objects.all(),
         'categorys': ProductCategory.objects.all()
     }
     return render(request, 'products/products.html', context)
@@ -27,7 +28,7 @@ def basket_add(request, product_id):
     baskets = Basket.objects.filter(user=request.user, product=product)
 
     if not baskets.exists():
-        Basket.objects.create(user=request.user, product=product, quantity=1)
+        Basket.objects. create(user=request.user, product=product, quantity=1)
     else:
         basket = baskets.first()
         basket.quantity += 1
