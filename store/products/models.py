@@ -10,6 +10,10 @@ class ProductCategory(models.Model):
     name = models.CharField(max_length=128, unique=True)
     description = models.TextField(null=True, blank=True)
 
+    class Meta:
+        verbose_name = 'категория'
+        verbose_name_plural = 'Категории'
+
     def __str__(self) -> str:
         return self.name
 
@@ -22,8 +26,13 @@ class Product(models.Model):
     image = models.ImageField(upload_to="products_image")
     category = models.ForeignKey(to=ProductCategory, on_delete=models.CASCADE)
 
+
+    class Meta:
+        verbose_name = 'продукт'
+        verbose_name_plural = 'Продукты'
+
     def __str__(self) -> str:
-        return f'''{self.name} | В наличии: {self.quantity}'''
+        return f'''{self.name}'''
 
 
 class BasketQuerySet(models.QuerySet):
