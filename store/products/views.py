@@ -1,34 +1,41 @@
-from django.shortcuts import render, HttpResponseRedirect
-from products.models import Product, ProductCategory, Basket
+# Функции = контроллеры = вьюхи = обработчики запросов
+
+from typing import Any, Dict
+from django.db.models.query import QuerySet
+from django.shortcuts import HttpResponseRedirect
+from django.views.generic.base import TemplateView
+from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 
-# Create your views here.
+from products.models import Product, ProductCategory, Basket
 
-# Функции = контроллеры = вьюхи = обработчики запросов
 
-def index(request):
-    context = {
-        'title': 'Store',
-    }
-    return render(request, 'products/index.html', context)
+class IndexView(TemplateView):
+    template_name = 'products/index.html'
 
-def products(request, category_id=None, page_num: int = 1):
+    def get_context_data(self, **kwargs: Any) -> Dict:
+        context = super(IndexView, self).get_context_data()
+        context['title'] = 'Store'
+        return context
 
-    per_page = 3
 
-    context = {
-        'title': 'Store - Каталог',
-        'products': Paginator(
-            Product.objects.filter(category__id=category_id) if category_id else Product.objects.all(),
-            per_page
-        ).page(page_num),
-        'categorys': ProductCategory.objects.all(),
-        'category_id': category_id,
-        'page_num': page_num,
-    }
-    return render(request, 'products/products.html', context)
+class ProductsListView(ListView):
+    model = Product
+    template_name = 'products/products.html'
+    paginate_by = 3
 
+    def get_context_data(self, **kwargs: Any) -> Dict:
+        context = super(ProductsListView, self).get_context_data()
+        context['title'] = 'Каталог'
+        context['categorys'] = ProductCategory.objects.all()
+        return context
+
+    def get_queryset(self) -> QuerySet:
+        queryset = super(ProductsListView, self).get_queryset()
+        category_id = self.kwargs.get('category_id')
+        return queryset.filter(category_id=category_id) if category_id else queryset
+    
 
 @login_required
 def basket_add(request, product_id):

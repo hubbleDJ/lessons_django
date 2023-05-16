@@ -18,11 +18,11 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from products.views import index
+from products.views import IndexView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'), #стартовая страница
+    path('', IndexView.as_view(), name='index'), #стартовая страница
     path('products/', include('products.urls', namespace='products')), #страница с товарами
     path('users/', include('users.urls', namespace='user')), #страница с пользователями
 ]
