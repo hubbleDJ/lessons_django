@@ -4,10 +4,10 @@ body {
 
 aside {
     float: left;
-    background: #181818;
+    /* background: #181818; */
     width: 20%;
     padding: 2.5%;
-    height: 100vh;
+    /* height: 100vh; */
     color: white;
     border-right: 5px solid #4d4d4d;
 }
@@ -26,6 +26,7 @@ aside .logo {
 }
 
 aside h3 {
+    padding: 2.5%;
     margin-top: 50px;
     font-size: 28px;
 }
@@ -62,4 +63,18 @@ main .features h1 {
 main .features p {
     max-width: 400px;
     margin: 20px auto;
+}
+
+.alert-warning {
+    float: left;
+    clear: both;
+    width: 400px;
+    margin: 20px 34%;
+    text-align: left;
+}
+
+form {
+    margin-left: 32%;
+    width: 500px;
+    margin-top: 50px;
 }
