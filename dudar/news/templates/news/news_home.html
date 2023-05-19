@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+    <div class="features">
+        <h1>Новости</h1>
+        <p>text</p>
+
+        {% for value in values %}
+            {% filter upper %}
+                <p>{{ value }}</p>
+            {% endfilter %}
+        {% endfor %}
+        <button class="btn btn-warning">На страницу "Про нас"</button>
+    </div>
+{% endblock content %}
