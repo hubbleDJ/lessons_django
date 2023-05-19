@@ -1,0 +1,12 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+<div class="features">
+    <h1>Про нас</h1>
+    <p>text</p>
+    {% for key in obj %}
+        <p>{{ key }}</p>
+    {% endfor %}
+    <button class="btn btn-danger">На главную</button>
+</div>
+{% endblock content %}
